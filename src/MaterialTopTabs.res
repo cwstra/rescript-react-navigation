@@ -23,8 +23,8 @@ type options = {
   tabBarShowIcon?: bool,
   tabBarBadge?: unit => React.element,
   tabBarIndicator?: unit => React.element,
-  tabBarIndicatorStyle?: Style.t,
-  tabBarIndicatorContainerStyle?: Style.t,
+  tabBarIndicatorStyle?: Style.View.t,
+  tabBarIndicatorContainerStyle?: Style.View.t,
   tabBarTestID?: string,
   tabBarActiveTintColor?: string,
   tabBarInactiveTintColor?: string,
@@ -32,39 +32,28 @@ type options = {
   tabBarPressOpacity?: float,
   tabBarBounces?: bool,
   tabBarScrollEnabled?: bool,
-  tabBarIconStyle?: Style.t,
-  tabBarLabelStyle?: Style.t,
-  tabBarItemStyle?: Style.t,
-  tabBarContentContainerStyle?: Style.t,
-  tabBarStyle?: Style.t,
+  tabBarIconStyle?: Style.View.t,
+  tabBarLabelStyle?: Style.Text.t,
+  tabBarItemStyle?: Style.View.t,
+  tabBarContentContainerStyle?: Style.View.t,
+  tabBarStyle?: Style.View.t,
   animationEnabled?: bool,
   swipeEnabled?: bool,
-  \"lazy"?: bool,
+  @as("lazy") lazy_?: bool,
   lazyPreloadDistance?: float,
   lazyPlaceholder?: unit => React.element,
 }
 
-type tabBarPosition = [#top | #bottom]
+type tabBarPosition =
+  | @as("top") Top
+  | @as("bottom") Bottom
 
-type keyboardDismissMode = [#auto | #"on-drag" | #none]
+type keyboardDismissMode =
+  | @as("auto") Auto
+  | @as("on-drag") OnDrag
+  | @as("none") None
 
-// TODO: outdated
 type tabBarProps = {
-  scrollEnabled?: bool,
-  pressColor?: string,
-  pressOpacity?: float,
-  //TODO: render: https://github.com/react-native-community/react-native-tab-view/blob/64e03bf14b0fac9c3bccd684bf31a04ecf19c50d/src/TabBar.tsx#L38-L51
-  tabStyle?: Style.t,
-  indicatorStyle?: Style.t,
-  labelStyle?: Style.t,
-  style?: Style.t,
-  renderIndicator?: React.component<{"route": route}>,
-  activeTintColor?: string,
-  inactiveTintColor?: string,
-  iconStyle?: Style.t,
-  showLabel?: bool,
-  showIcon?: bool,
-  allowFontScaling?: bool,
   // ----
   state: navigationState,
   navigation: navigation,
@@ -86,8 +75,8 @@ module type NavigatorModule = {
       ~tabBarPosition: tabBarPosition=?,
       ~keyboardDismissMode: keyboardDismissMode=?,
       ~initialLayout: layout=?,
-      ~sceneContainerStyle: Style.t=?,
-      ~style: Style.t=?,
+      ~sceneContainerStyle: Style.View.t=?,
+      ~style: Style.View.t=?,
       ~tabBar: tabBarProps => React.element=?,
       ~children: React.element,
     ) => React.element

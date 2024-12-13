@@ -38,7 +38,7 @@ module type NavigatorModule = {
       ~labeled: bool=?,
       ~activeColor: Color.t=?,
       ~inactiveColor: Color.t=?,
-      ~barStyle: Style.t=?,
+      ~barStyle: Style.View.t=?,
       ~children: React.element,
     ) => React.element
   }

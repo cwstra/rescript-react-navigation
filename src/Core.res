@@ -30,7 +30,12 @@ type getIdOptions = {params: params}
 
 type layout = {width: float, height: float}
 
-type backBehavior = [#firstRoute | #initialRoute | #order | #history | #none]
+type backBehavior =
+  | @as("firstRoute") FirstRoute
+  | @as("initialRoute") InitialRoute
+  | @as("order") Order
+  | @as("history") History
+  | @as("none") None
 
 type unsubscribe = unit => unit
 

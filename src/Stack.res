@@ -4,38 +4,43 @@ open Core
 open Elements
 open ReactNative
 
-type presentation = [#card | #modal | #transparentModal]
+type presentation =
+  | @as("card") Card
+  | @as("modal") Modal
+  | @as("transparentModal") TransparentModal
 
-type animationTypeForReplace = [#push | #pop]
+type animationTypeForReplace =
+  | @as("push") Push
+  | @as("pop") Pop
 
-type gestureDirection = [#horizontal | #"horizontal-inverted" | #"vertical-inverted"]
+type gestureDirection =
+  | @as("horizontal") Horizontal
+  | @as("horizontal-inverted") HorizontalInverted
+  | @as("vertical-inverted") VerticalInverted
 
 module TransitionSpec = {
-  type t
-
   type springConfig = {
-    damping: int,
-    mass: int,
-    stiffness: int,
-    restSpeedThreshold: int,
-    restDisplacementThreshold: int,
-    overshootClamping: bool,
+    damping?: int,
+    mass?: int,
+    stiffness?: int,
+    restSpeedThreshold?: int,
+    restDisplacementThreshold?: int,
+    overshootClamping?: bool,
   }
-
-  @obj
-  external spring: (~animation: [#spring], ~config: springConfig) => t = ""
 
   type timingConfig = {
-    duration: int,
-    easing: Easing.t,
+    duration?: int,
+    easing?: Easing.t,
   }
 
-  @obj
-  external timing: (~animation: [#timing], ~config: timingConfig) => t = ""
+  @tag("animation")
+  type t =
+    | @as("spring") Spring({config: springConfig})
+    | @as("timing") Timing({config: timingConfig})
 }
 
 type transitionSpec = {
-  \"open": TransitionSpec.t,
+  @as("open") open_: TransitionSpec.t,
   close: TransitionSpec.t,
 }
 
@@ -63,11 +68,11 @@ type headerInterpolationProps = {
 }
 
 type headerInterpolatedStyle = {
-  leftLabelStyle?: Style.t,
-  leftButtonStyle?: Style.t,
-  rightButtonStyle?: Style.t,
-  titleStyle?: Style.t,
-  backgroundStyle?: Style.t,
+  leftLabelStyle?: Style.View.t,
+  leftButtonStyle?: Style.View.t,
+  rightButtonStyle?: Style.View.t,
+  titleStyle?: Style.View.t,
+  backgroundStyle?: Style.View.t,
 }
 
 type headerStyleInterpolator = headerInterpolationProps => headerInterpolatedStyle
@@ -82,15 +87,17 @@ type cardInterpolationProps = {
 }
 
 type cardInterpolatedStyle = {
-  containerStyle?: Style.t,
-  cardStyle?: Style.t,
-  overlayStyle?: Style.t,
-  shadowStyle?: Style.t,
+  containerStyle?: Style.View.t,
+  cardStyle?: Style.View.t,
+  overlayStyle?: Style.View.t,
+  shadowStyle?: Style.View.t,
 }
 
 type stackCardStyleInterpolator = cardInterpolationProps => cardInterpolatedStyle
 
-type headerMode = [#float | #screen]
+type headerMode =
+  | @as("float") Float
+  | @as("screen") Screen
 
 type headerBackImageProps = {tintColor: Color.t}
 
@@ -101,11 +108,12 @@ type progress = {
 }
 
 type rec options = {
+  ...Header.options,
   title?: string,
   cardShadowEnabled?: bool,
   cardOverlayEnabled?: bool,
   cardOverlay?: unit => React.element,
-  cardStyle?: Style.t,
+  cardStyle?: Style.View.t,
   presentation?: presentation,
   animationEnabled?: bool,
   animationTypeForReplace?: animationTypeForReplace,
@@ -127,27 +135,7 @@ type rec options = {
   headerBackTitle?: string,
   headerBackTitleVisible?: bool,
   headerTruncatedBackTitle?: string,
-  headerBackTitleStyle?: Style.t,
-  // Header props from https://reactnavigation.org/docs/elements#header
-  headerTitle?: Header.headerTitle,
-  headerTitleAlign?: Header.headerTitleAlign,
-  headerTitleAllowFontScaling?: bool,
-  headerTitleStyle?: Style.t,
-  headerTitleContainerStyle?: Style.t,
-  headerLeft?: Header.headerLeftProps => React.element,
-  headerLeftLabelVisible?: bool,
-  headerLeftContainerStyle?: Style.t,
-  headerRight?: Header.headerRightProps => React.element,
-  headerRightContainerStyle?: Style.t,
-  headerPressColor?: Color.t,
-  headerPressOpacity?: float,
-  headerTintColor?: Color.t,
-  headerBackground?: Header.headerBackgroundOptions => React.element,
-  headerBackgroundContainerStyle?: Style.t,
-  headerTransparent?: bool,
-  headerStyle?: Style.t,
-  headerShadowVisible?: bool,
-  headerStatusBarHeight?: Style.size,
+  headerBackTitleStyle?: Style.Text.t,
 }
 and headerParams = {
   navigation: navigation,

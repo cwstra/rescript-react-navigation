@@ -2,9 +2,9 @@ open ReactNative
 
 module Header = {
   type headerTitleProps = {
-    allowFontScaling: option<bool>,
-    tintColor: option<Color.t>,
-    style: option<Style.t>,
+    allowFontScaling?: bool,
+    tintColor?: Color.t,
+    style?: Style.Text.t,
     children: string,
   }
 
@@ -26,33 +26,49 @@ module Header = {
     pressOpacity: option<float>,
   }
 
-  type headerBackgroundOptions = {style: option<Style.t>}
+  type headerBackgroundOptions = {style: option<Style.View.t>}
 
-  type headerTitleAlign = [#left | #center]
+  type headerTitleAlign =
+    | @as("left") Left
+    | @as("center") Center
 
-  @react.component @module("@react-navigation/elements")
-  external make: (
-    ~title: string=?,
-    ~headerTitle: headerTitle=?,
-    ~headerTitleAlign: headerTitleAlign=?,
-    ~headerTitleAllowFontScaling: bool=?,
-    ~headerTitleStyle: Style.t=?,
-    ~headerTitleContainerStyle: Style.t=?,
-    ~headerLeft: headerLeftProps => React.element=?,
-    ~headerLeftLabelVisible: bool=?,
-    ~headerLeftContainerStyle: Style.t=?,
-    ~headerRight: headerRightProps => React.element=?,
-    ~headerRightContainerStyle: Style.t=?,
-    ~headerPressColor: Color.t=?,
-    ~headerPressOpacity: float=?,
-    ~headerTintColor: Color.t=?,
-    ~headerBackground: headerBackgroundOptions => React.element=?,
-    ~headerBackgroundContainerStyle: Style.t=?,
-    ~headerTransparent: bool=?,
-    ~headerStyle: Style.t=?,
-    ~headerShadowVisible: bool=?,
-    ~headerStatusBarHeight: Style.size=?,
-  ) => React.element = "Header"
+  // Header props from https://reactnavigation.org/docs/elements#header
+  type options = {
+    headerTitle?: headerTitle,
+    headerTitleAlign?: headerTitleAlign,
+    headerTitleAllowFontScaling?: bool,
+    headerTitleStyle?: Style.Text.t,
+    headerTitleContainerStyle?: Style.View.t,
+    headerLeft?: headerLeftProps => React.element,
+    headerLeftLabelVisible?: bool,
+    headerLeftContainerStyle?: Style.View.t,
+    headerRight?: headerRightProps => React.element,
+    headerRightContainerStyle?: Style.View.t,
+    headerPressColor?: Color.t,
+    headerPressOpacity?: float,
+    headerTintColor?: Color.t,
+    headerBackground?: headerBackgroundOptions => React.element,
+    headerBackgroundContainerStyle?: Style.View.t,
+    headerTransparent?: bool,
+    headerStyle?: Style.View.t,
+    headerShadowVisible?: bool,
+    headerStatusBarHeight?: Style.size,
+  }
+
+  type headerBack = {
+    title?: string,
+    href?: string,
+  }
+  type props = {
+    ...options,
+    back?: headerBack,
+    modal?: bool,
+    layout?: Core.layout,
+    title: string,
+  }
+
+  @module("@react-navigation/elements")
+  external make: props => React.element = "Header"
 }
 
 module HeaderBackground = {

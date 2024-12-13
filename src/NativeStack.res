@@ -7,47 +7,47 @@ open ReactNative
 @module("react-native-screens")
 external enableScreens: unit => unit = "enableScreens"
 
-type animation = [
-  | #default
-  | #fade
-  | #fade_from_bottom
-  | #flip
-  | #simple_push
-  | #slide_from_bottom
-  | #slide_from_right
-  | #slide_from_left
-  | #none
-]
+type animation =
+  | @as("default") Default
+  | @as("fade") Fade
+  | @as("fade_from_bottom") FadeFromBottom
+  | @as("flip") Flip
+  | @as("simple_push") SimplePush
+  | @as("slide_from_bottom") SlideFromBottom
+  | @as("slide_from_right") SlideFromRight
+  | @as("slide_from_left") SlideFromLeft
+  | @as("none") None
 
-type animationTypeForReplace = [#push | #pop]
+type animationTypeForReplace =
+  | @as("push") Push
+  | @as("pop") Pop
 
 type headerBackTitleStyle = {
   fontFamily?: string,
   fontSize?: float,
 }
 
-type blurEffect = [
-  | #extraLight
-  | #light
-  | #dark
-  | #regular
-  | #prominent
-  | #systemUltraThinMaterial
-  | #systemThinMaterial
-  | #systemMaterial
-  | #systemThickMaterial
-  | #systemChromeMaterial
-  | #systemUltraThinMaterialLight
-  | #systemThinMaterialLight
-  | #systemMaterialLight
-  | #systemThickMaterialLight
-  | #systemChromeMaterialLight
-  | #systemUltraThinMaterialDark
-  | #systemThinMaterialDark
-  | #systemMaterialDark
-  | #systemThickMaterialDark
-  | #systemChromeMaterialDark
-]
+type blurEffect =
+  | @as("extraLight") ExtraLight
+  | @as("light") Light
+  | @as("dark") Dark
+  | @as("regular") Regular
+  | @as("prominent") Prominent
+  | @as("systemUltraThinMaterial") SystemUltraThinMaterial
+  | @as("systemThinMaterial") SystemThinMaterial
+  | @as("systemMaterial") SystemMaterial
+  | @as("systemThickMaterial") SystemThickMaterial
+  | @as("systemChromeMaterial") SystemChromeMaterial
+  | @as("systemUltraThinMaterialLight") SystemUltraThinMaterialLight
+  | @as("systemThinMaterialLight") SystemThinMaterialLight
+  | @as("systemMaterialLight") SystemMaterialLight
+  | @as("systemThickMaterialLight") SystemThickMaterialLight
+  | @as("systemChromeMaterialLight") SystemChromeMaterialLight
+  | @as("systemUltraThinMaterialDark") SystemUltraThinMaterialDark
+  | @as("systemThinMaterialDark") SystemThinMaterialDark
+  | @as("systemMaterialDark") SystemMaterialDark
+  | @as("systemThickMaterialDark") SystemThickMaterialDark
+  | @as("systemChromeMaterialDark") SystemChromeMaterialDark
 
 type headerLargeStyle = {backgroundColor?: Color.t}
 
@@ -66,39 +66,45 @@ type headerTitleStyle = {
   color?: Color.t,
 }
 
-type presentation = [
-  | #card
-  | #modal
-  | #transparentModal
-  | #containedModal
-  | #containedTransparentModal
-  | #fullScreenModal
-  | #formSheet
-]
+type presentation =
+  | @as("card") Card
+  | @as("modal") Modal
+  | @as("transparentModal") TransparentModal
+  | @as("containedModal") ContainedModal
+  | @as("containedTransparentModal") ContainedTransparentModal
+  | @as("fullScreenModal") FullScreenModal
+  | @as("formSheet") FormSheet
 
-type statusBarStyle = [#auto | #inverted | #light | #dark]
+type statusBarStyle =
+  | @as("auto") Auto
+  | @as("inverted") Inverted
+  | @as("light") Light
+  | @as("dark") Dark
 
-type statusBarAnimation = [#fade | #none | #slide]
+type statusBarAnimation =
+  | @as("fade") Fade
+  | @as("none") None
+  | @as("slide") Slide
 
-type orientation = [
-  | #default
-  | #all
-  | #portrait
-  | #portrait_up
-  | #portrait_down
-  | #landscape
-  | #landscape_left
-  | #landscape_right
-]
+type orientation =
+  | @as("default") Default
+  | @as("all") All
+  | @as("portrait") Portrait
+  | @as("portrait_up") PortraitUp
+  | @as("portrait_down") PortraitDown
+  | @as("landscape") Landscape
+  | @as("landscape_left") LandscapeLeft
+  | @as("landscape_right") LandscapeRight
 
-type headerTitleAlign = [#left | #center]
+type headerTitleAlign =
+  | @as("left") Left
+  | @as("center") Center
 
-type inputType = [
-  | #text
-  | #phone
-  | #number
-  | #email
-]
+type inputType =
+  | @as("text") Text
+  | @as("phone") Phone
+  | @as("number") Number
+  | @as("email") Email
 
 type headerSearchBarOptions = {
   autoCapitalize?: TextInput.autoCapitalize,
@@ -122,7 +128,9 @@ type headerSearchBarOptions = {
 
 type backOptions = {title?: string}
 
-type gestureDirection = [#vertical | #horizontal]
+type gestureDirection =
+  | @as("vertical") Vertical
+  | @as("horizontal") Horizontal
 
 type rec options = {
   title?: string,
@@ -155,7 +163,7 @@ type rec options = {
   statusBarStyle?: statusBarStyle,
   statusBarColor?: Color.t,
   statusBarTranslucent?: bool,
-  contentStyle?: Style.t,
+  contentStyle?: Style.View.t,
   customAnimationOnGesture?: bool,
   fullScreenGestureEnabled?: bool,
   gestureEnabled?: bool,

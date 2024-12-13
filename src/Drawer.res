@@ -4,7 +4,9 @@ open Core
 open Elements
 open ReactNative
 
-type keyboardDismissMode = [#"on-drag" | #none]
+type keyboardDismissMode =
+  | @as("on-drag") OnDrag
+  | @as("none") None
 
 type drawerLabelProps = {
   focused: bool,
@@ -17,35 +19,45 @@ type drawerIconProps = {
   size: float,
 }
 
-type drawerPosition = [#left | #right]
+type drawerPosition =
+  | @as("left") Left
+  | @as("right") Right
 
-type drawerType = [#front | #back | #slide | #permanent]
+type drawerType =
+  | @as("front") Front
+  | @as("back") Back
+  | @as("slide") Slide
+  | @as("permanent") Permanent
 
-type drawerStatusBarAnimation = [#slide | #fade | #none]
+type drawerStatusBarAnimation =
+  | @as("slide") Slide
+  | @as("fade") Fade
+  | @as("none") None
 
 // TODO
 type gestureHandlerProps
 
 type rec options = {
+  ...Header.options,
   title?: string,
-  \"lazy"?: bool,
+  @as("lazy") lazy_?: bool,
   drawerLabel?: drawerLabelProps => React.element,
   drawerIcon?: drawerIconProps => React.element,
   drawerActiveTintColor?: Color.t,
   drawerActiveBackgroundColor?: Color.t,
   drawerInactiveTintColor?: Color.t,
   drawerInactiveBackgroundColor?: Color.t,
-  drawerItemStyle?: Style.t,
-  drawerLabelStyle?: Style.t,
-  drawerContentContainerStyle?: Style.t,
-  drawerContentStyle?: Style.t,
-  drawerStyle?: Style.t,
+  drawerItemStyle?: Style.View.t,
+  drawerLabelStyle?: Style.Text.t,
+  drawerContentContainerStyle?: Style.View.t,
+  drawerContentStyle?: Style.View.t,
+  drawerStyle?: Style.View.t,
   drawerPosition?: drawerPosition,
   drawerType?: drawerType,
   drawerHideStatusBarOnOpen?: bool,
   drawerStatusBarAnimation?: drawerStatusBarAnimation,
   overlayColor?: Color.t,
-  sceneContainerStyle?: Style.t,
+  sceneStyle?: Style.View.t,
   gestureEnabled?: bool,
   gestureHandlerProps?: gestureHandlerProps,
   swipeEnabled?: bool,
@@ -56,26 +68,6 @@ type rec options = {
   freezeOnBlur?: bool,
   headerShown?: bool,
   header?: headerProps => React.element,
-  // Header props from https://reactnavigation.org/docs/elements#header
-  headerTitle?: Header.headerTitle,
-  headerTitleAlign?: Header.headerTitleAlign,
-  headerTitleAllowFontScaling?: bool,
-  headerTitleStyle?: Style.t,
-  headerTitleContainerStyle?: Style.t,
-  headerLeft?: Header.headerLeftProps => React.element,
-  headerLeftLabelVisible?: bool,
-  headerLeftContainerStyle?: Style.t,
-  headerRight?: Header.headerRightProps => React.element,
-  headerRightContainerStyle?: Style.t,
-  headerPressColor?: Color.t,
-  headerPressOpacity?: float,
-  headerTintColor?: Color.t,
-  headerBackground?: Header.headerBackgroundOptions => React.element,
-  headerBackgroundContainerStyle?: Style.t,
-  headerTransparent?: bool,
-  headerStyle?: Style.t,
-  headerShadowVisible?: bool,
-  headerStatusBarHeight?: Style.size,
 }
 and headerProps = {
   navigation: navigation,
@@ -90,7 +82,9 @@ type contentComponentProps = {
   descriptors: descriptors,
 }
 
-type drawerStatus = [#"open" | #closed]
+type drawerStatus =
+  | @as("open") Open
+  | @as("closed") Closed
 
 module type NavigatorModule = {
   module Navigator: {

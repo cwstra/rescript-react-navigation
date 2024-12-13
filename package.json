@@ -12,8 +12,8 @@
     "@react-navigation/material-top-tabs": ">=6.1.0",
     "@react-navigation/native": ">=6.1.0",
     "@react-navigation/stack": ">=6.1.0",
-    "@rescript/react": ">=0.11.0",
-    "rescript-react-native": ">=0.71.0"
+    "@rescript/react": ">=0.12.0",
+    "rescript-react-native": ">=0.74.3"
   },
   "repository": "https://github.com/rescript-react-native/react-navigation.git",
   "license": "MIT",
@@ -43,13 +43,14 @@
     "release": "npmpub"
   },
   "devDependencies": {
-    "@rescript/react": "^0.11.0",
+    "@rescript/react": "^0.12.2",
     "husky": "^4.0.0",
     "lint-staged": "^10.0.0",
     "npmpub": "^5.0.0",
     "prettier": "^2.0.0",
     "rescript": "^11.0.0",
-    "rescript-react-native": ">=0.71.1"
+    "rescript-react-native": "git+https://github.com/cwstra/rescript-react-native#20a603020fe3ea0751ae3d7db2b5b70159a4ed36",
+    "react-dom": "^18.2.0"
   },
   "prettier": {
     "trailingComma": "all"

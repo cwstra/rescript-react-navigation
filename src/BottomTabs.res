@@ -4,7 +4,9 @@ open Core
 open Elements
 open ReactNative
 
-type tabBarLabelPosition = [#"below-icon" | #"beside-icon"]
+type tabBarLabelPosition =
+  | @as("below-icon") BelowIcon
+  | @as("beside-icon") BesideIcon
 
 type tabBarIconOptions = {
   focused: bool,
@@ -19,15 +21,16 @@ module TabBarBadge = {
 }
 
 type rec options = {
+  ...Header.options,
   title?: string,
   tabBarLabel?: string,
   tabBarShowLabel?: bool,
   tabBarLabelPosition?: tabBarLabelPosition,
-  tabBarLabelStyle?: Style.t,
+  tabBarLabelStyle?: Style.Text.t,
   tabBarIcon?: tabBarIconOptions => React.element,
-  tabBarIconStyle?: Style.t,
+  tabBarIconStyle?: Style.Text.t,
   tabBarBadge?: string,
-  tabBarBadgeStyle?: Style.t,
+  tabBarBadgeStyle?: Style.Text.t,
   tabBarAccessibilityLabel?: string,
   tabBarTestID?: string,
   tabBarButton?: unit => React.element, // TODO: props
@@ -37,34 +40,14 @@ type rec options = {
   tabBarActiveBackgroundColor?: string,
   tabBarInactiveBackgroundColor?: string,
   tabBarHideOnKeyboard?: bool,
-  tabBarItemStyle?: Style.t,
-  tabBarStyle?: Style.t,
+  tabBarItemStyle?: Style.View.t,
+  tabBarStyle?: Style.View.t,
   tabBarBackground?: unit => React.element,
-  \"lazy"?: bool,
+  @as("lazy") lazy_?: bool,
   unmountOnBlur?: bool,
   freezeOnBlur?: bool,
   header?: headerParams => React.element,
   headerShown?: bool,
-  // Header props from https://reactnavigation.org/docs/elements#header
-  headerTitle?: Header.headerTitle,
-  headerTitleAlign?: Header.headerTitleAlign,
-  headerTitleAllowFontScaling?: bool,
-  headerTitleStyle?: Style.t,
-  headerTitleContainerStyle?: Style.t,
-  headerLeft?: Header.headerLeftProps => React.element,
-  headerLeftLabelVisible?: bool,
-  headerLeftContainerStyle?: Style.t,
-  headerRight?: Header.headerRightProps => React.element,
-  headerRightContainerStyle?: Style.t,
-  headerPressColor?: Color.t,
-  headerPressOpacity?: float,
-  headerTintColor?: Color.t,
-  headerBackground?: Header.headerBackgroundOptions => React.element,
-  headerBackgroundContainerStyle?: Style.t,
-  headerTransparent?: bool,
-  headerStyle?: Style.t,
-  headerShadowVisible?: bool,
-  headerStatusBarHeight?: Style.size,
 }
 and headerParams = {
   navigation: navigation,
@@ -82,7 +65,7 @@ module type NavigatorModule = {
       ~screenOptions: screenOptionsParams => options=?,
       ~backBehavior: backBehavior=?,
       ~detachInactiveScreens: bool=?,
-      ~sceneContainerStyle: Style.t=?,
+      ~sceneStyle: Style.View.t=?,
       ~tabBar: unit => React.element=?,
       ~children: React.element,
     ) => React.element
