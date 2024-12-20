@@ -8,7 +8,7 @@ module Params = {
 type params = Params.t
 
 type rec route = {
-  key: string,
+  key?: string,
   name: string,
   params?: params,
   path?: string,
