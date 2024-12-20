@@ -10,8 +10,8 @@ type params = Params.t
 type rec route = {
   key: string,
   name: string,
-  params: option<params>,
-  path: option<string>,
+  params?: params,
+  path?: string,
 }
 and navigationState = {
   key: string,
