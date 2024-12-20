@@ -8,13 +8,13 @@ module Params = {
 type params = Params.t
 
 type rec route = {
-  key?: string,
+  key: string,
   name: string,
   params?: params,
   path?: string,
 }
 and navigationState = {
-  key?: string,
+  key: string,
   index: int,
   routeNames: array<string>,
   routes: array<route>,
@@ -68,8 +68,20 @@ module Navigation = {
 
   @send external goBack: (navigation, unit) => unit = "goBack"
 
+  type rec partialRoute = {
+    key?: string,
+    name: string,
+    params?: params,
+    path?: string,
+  }
+  and partialNavigationState = {
+    key?: string,
+    index?: int,
+    routeNames?: array<string>,
+    routes?: array<partialRoute>,
+  }
   @send
-  external reset: (navigation, navigationState) => unit = "reset"
+  external reset: (navigation, partialNavigationState) => unit = "reset"
 
   @send external isFocused: (navigation, unit) => bool = "isFocused"
 
