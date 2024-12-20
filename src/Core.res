@@ -14,7 +14,7 @@ type rec route = {
   path?: string,
 }
 and navigationState = {
-  key: string,
+  key?: string,
   index: int,
   routeNames: array<string>,
   routes: array<route>,
